@@ -54,3 +54,21 @@
     opacity: 1;
     animation: float 3s ease-in-out forwards;
   }
+
+  /* https://www.w3schools.com/cssref/atrule_keyframes.php */
+@keyframes float {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+  
+    50% {
+      transform: translate(-50%, -60%) scale(1.2);
+      opacity: 0.9;
+    }
+  
+    100% {
+      transform: translate(-50%, -70%) scale(1.5);
+      opacity: 0;
+    }
+  }
