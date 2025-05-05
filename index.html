@@ -1,1 +1,72 @@
-<!doctypehtml><html lang=es><meta charset=UTF-8><title>Juego de Cálculo</title><link href=styles.css rel=stylesheet><link href=instrucciones.css rel=stylesheet><link href=mensaje.css rel=stylesheet><link href=cards.css rel=stylesheet><link href=responsive.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js></script><meta content="width=device-width,initial-scale=1"name=viewport><h1>Juego de Cálculo</h1><div class=instructions-box id=instructions><p style=position:relative><strong>¿Cómo jugar?</strong> <span id=span1F783>🞀</span><ul><li>Haz clic en dos cartas rosas para revelar un número objetivo de dos dígitos.<li>Usa los números rojos visibles (1 al 9) para construir una operación.<li>Debes usar los tres operadores <strong>en orden</strong>: multiplicación (*), suma (+), y resta (-).<li><strong>No está permitido multiplicar por 1.</strong><li>Presiona "Comprobar" antes de que se acabe el tiempo.<li>Puedes reiniciar el juego cuando quieras.</ul></div><div class=card-container id=hidden-cards style=flex-direction:row><div id=cardResponsiveRow1></div><div id=cardResponsiveRow2></div></div><p id=target-number><div class=card-container id=visible-cards><div class="card visible"data-value=1 onclick=pushNumber(this)>1</div><div class="card visible"data-value=2 onclick=pushNumber(this)>2</div><div class="card visible"data-value=3 onclick=pushNumber(this)>3</div><div class="card visible"data-value=4 onclick=pushNumber(this)>4</div><div class="card visible"data-value=5 onclick=pushNumber(this)>5</div><div class="card visible"data-value=6 onclick=pushNumber(this)>6</div><div class="card visible"data-value=7 onclick=pushNumber(this)>7</div><div class="card visible"data-value=8 onclick=pushNumber(this)>8</div><div class="card visible"data-value=9 onclick=pushNumber(this)>9</div></div><div class=card-container id=operators><button class=operator data-op=*>×</button> <button class=operator data-op=+>+</button> <button class=operator data-op=->−</button></div><input class=expression-box id=expression placeholder="Ejemplo: 2*3+4-1"readonly><div class=timer-box id=timer>Tiempo: 60</div><div><button class="action-btn check-btn"id=check>Comprobar</button> <button class="action-btn reset-btn"id=reset>Reiniciar Juego</button></div><p id=message class=message-box></p><script src=script.js></script>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Juego de Cálculo</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="instrucciones.css">
+  <link rel="stylesheet" href="mensaje.css">
+  <link rel="stylesheet" href="cards.css">
+  <link rel="stylesheet" href="responsive.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+  <h1>Juego de Cálculo</h1>
+
+  <div id="instructions" class="instructions-box">
+    <p style="position: relative;">
+      <strong>¿Cómo jugar?</strong>
+      <span id="span1F783">&#128896;</span>
+    </p>
+    <ul>
+      <li>Haz clic en dos cartas rosas para revelar un número objetivo de dos dígitos.</li>
+      <li>Usa los números rojos visibles (1 al 9) para construir una operación.</li>
+      <li id='usar-los-tres-operadores'>Debes usar los tres operadores <strong>en orden</strong>: multiplicación (*), suma (+), y resta (-).</li>
+      <li id='multiplicar-por-1'><strong>No está permitido multiplicar por 1.</strong></li>
+      <li>Presiona "Comprobar" antes de que se acabe el tiempo.</li>
+      <li>Puedes reiniciar el juego cuando quieras.</li>
+    </ul>
+  </div>
+
+  <div id="hidden-cards" class="card-container">
+    <div id="cardResponsiveRow1"></div>
+    <div id="cardResponsiveRow2"></div>
+  </div>
+
+  <h3 id="target-number"></h3>
+
+  <div id="visible-cards" class="card-container">
+    <div class="card visible" data-value="1" onclick="pushNumber(this)">1</div>
+    <div class="card visible" data-value="2" onclick="pushNumber(this)">2</div>
+    <div class="card visible" data-value="3" onclick="pushNumber(this)">3</div>
+    <div class="card visible" data-value="4" onclick="pushNumber(this)">4</div>
+    <div class="card visible" data-value="5" onclick="pushNumber(this)">5</div>
+    <div class="card visible" data-value="6" onclick="pushNumber(this)">6</div>
+    <div class="card visible" data-value="7" onclick="pushNumber(this)">7</div>
+    <div class="card visible" data-value="8" onclick="pushNumber(this)">8</div>
+    <div class="card visible" data-value="9" onclick="pushNumber(this)">9</div>
+  </div>
+
+  <div id="operators" class="card-container">
+    <button class="operator" data-op="*">×</button>
+    <button class="operator" data-op="+">+</button>
+    <button class="operator" data-op="-">−</button>
+  </div>
+
+  <input type="text" id="expression" class="expression-box" placeholder="Ejemplo: 25 x 4 + 6 - 9 = 97">
+  <div id="timer" class="timer-box">Tiempo: 60</div>
+  
+  <div>
+    <button id="check" class="action-btn check-btn">Comprobar</button>
+    <button id="reset" class="action-btn reset-btn">Reiniciar Juego</button>
+  </div>
+  <p id="message" class="message-box"></p>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
