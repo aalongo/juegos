@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Juego de Memoria - Provincias Argentinas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div id="game-container">
+
+    <div id="fuentes">
+      Fuente de la Imagen
+      <a href="http://modalidadespecial.educ.ar/">modalidadespecial.educ.ar</a>
+      <br>
+      <br>
+      <div>
+        <p>El autor de este juego</p>
+        <p>considera a las Islas Malvinas</p>
+        <p>parte del territorio Nacional Argentino</p>
+      </div>
+      <div>
+        <p>La falta de conseguir un SVG</p>
+        <p>que las incluya </p>
+        <p>hizo que no puedan ser agregadas</p>
+      </div>
+    </div>
+
+    <!-- Mapa se carga aquí dinámicamente -->
+    <div id="map-container">
+      <!-- SVG se inserta por JavaScript -->
+    </div>
+
+    <!-- Panel de adivinanza -->
+    <div id="guess-section">
+      <input type="text" id="user-guess" placeholder="Escribe la provincia que falta">
+      <div id="timer">⏱ Tiempo restante: 60s</div>
+      <button onclick="checkGuess()">Comprobar</button>
+      <div id="result"></div>
+      <button onclick="startGame()">🔄 Reiniciar</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
