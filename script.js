@@ -1,1 +1,103 @@
-const instructionsDiv=document.getElementById("instructions"),hiddenCardsContainer=document.getElementById("hidden-cards"),cardResponsiveRow1=document.getElementById("cardResponsiveRow1"),cardResponsiveRow2=document.getElementById("cardResponsiveRow2"),visibleCardsContainer=document.getElementById("visible-cards"),targetDisplay=document.getElementById("target-number"),timerDisplay=document.getElementById("timer"),checkBtn=document.getElementById("check"),resetBtn=document.getElementById("reset"),messageDisplay=document.getElementById("message"),expressionInput=document.getElementById("expression"),operators=document.getElementById("operators");let selectedHidden=[],targetNumber=null,timer=60,interval,usedNumbers=new Set;const sounds={flip:new Audio("flip.mp3"),correct:new Audio("correct.mp3"),incorrect:new Audio("incorrect.mp3"),timeUp:new Audio("timeup.mp3"),pocotiempo:new Audio("pocotiempo.mp3"),piropo:new Audio("silvido.mp3")};function pushNumber(e){expressionInput.value+=e.dataset.value,usedNumbers.add(e),e.classList.add("disabled")}function barajarDe0a10(){let e=[...Array(10).keys()];for(let t=e.length-1;t>0;t--){const n=Math.floor(Math.random()*(t+1));[e[t],e[n]]=[e[n],e[t]]}return e}function createHiddenCards(){cardResponsiveRow1.innerHTML="",cardResponsiveRow2.innerHTML="";barajarDe0a10().forEach((e=>{const t=document.createElement("div");t.className="card hidden",t.textContent=e,t.dataset.value=e,t.addEventListener("click",(()=>{selectedHidden.length<2&&!t.classList.contains("revealed")&&(t.classList.remove("hidden"),t.classList.add("revealed"),selectedHidden.push(Number(t.dataset.value)),sounds.flip.play(),2===selectedHidden.length&&(targetNumber=10*selectedHidden[0]+selectedHidden[1],targetDisplay.textContent=`Número objetivo: ${targetNumber}`,startTimer()))})),cardResponsiveRow1.childElementCount==cardResponsiveRow2.childElementCount?cardResponsiveRow1.appendChild(t):cardResponsiveRow2.appendChild(t)})),hiddenCardsContainer.appendChild(cardResponsiveRow1)}function startTimer(){window.innerWidth<900&&(visibleCardsContainer.style.display="initial",operators.style.display="inherit",hiddenCardsContainer.style.display="none",visibleCardsContainer.classList.add("fadeIn"),operators.classList.add("fadeIn")),clearInterval(interval),timer=60,interval=setInterval((()=>{timer--,timerDisplay.textContent=`Tiempo: ${timer}`,updateTimerStyle(),3==timer&&(sounds.pocotiempo.play(),document.getElementById("buzzer").removeAttribute("hidden"),setInterval((()=>{128264==document.getElementById("buzzer").innerHTML.codePointAt()?document.getElementById("buzzer").innerHTML="&#128265":128265==document.getElementById("buzzer").innerHTML.codePointAt()?document.getElementById("buzzer").innerHTML="&#128266":128266==document.getElementById("buzzer").innerHTML.codePointAt()&&(document.getElementById("buzzer").innerHTML="&#128264")}),300)),timer<=0&&(clearInterval(interval),messageDisplay.textContent="¡Tiempo agotado!",sounds.timeUp.play(),document.getElementById("buzzer").setAttribute("hidden","hidden"))}),1e3)}function updateTimerStyle(){timer<=20?(timerDisplay.style.backgroundColor="red",timerDisplay.style.color="white"):timer<=40?(timerDisplay.style.backgroundColor="yellow",timerDisplay.style.color="black"):timerDisplay.style.backgroundColor="green"}function estadoInicial(){window.innerWidth<1e3&&expressionInput.setAttribute("readonly","readonly"),sounds.pocotiempo.pause(),document.getElementById("buzzer").setAttribute("hidden","hidden"),expressionInput.value="",window.innerWidth<900&&(visibleCardsContainer.style.display="none",operators.style.display="none")}document.querySelectorAll(".operator").forEach((e=>{e.addEventListener("click",(()=>{expressionInput.value+=e.dataset.op,e.classList.add("disabled")}))})),checkBtn.addEventListener("click",(()=>{const expr=expressionInput.value;try{if(!/^.*\*.*\+.*-.*$/.test(expr))return messageDisplay.textContent="Debes usar los operadores en orden: x + -",document.getElementById("usar-los-tres-operadores").className="incorrect",sounds.incorrect.play(),void setTimeout((()=>{document.getElementById("usar-los-tres-operadores").className="",messageDisplay.textContent="",messageDisplay.className="message-box"}),3e3);if(/(^|[^0-9])1\*|(\*)1([^0-9]|$)/.test(expr))return messageDisplay.textContent="🚫 No se permite multiplicar directamente por 1. Usa otros números.",messageDisplay.className="message-box incorrect",document.getElementById("multiplicar-por-1").className="incorrect",sounds.incorrect.play(),void setTimeout((()=>{document.getElementById("multiplicar-por-1").className="",messageDisplay.textContent="",messageDisplay.className="message-box"}),3e3);const result=eval(expr);if(result===targetNumber){messageDisplay.textContent="¡Correcto!",timer<=40?sounds.correct.play():sounds.piropo.play(),clearInterval(interval),confetti({particleCount:150,spread:70,origin:{y:.6}});const e=document.createElement("div");e.textContent="¡Ganaste!",e.classList.add("win-message"),document.body.appendChild(e),setTimeout((()=>{e.style.opacity=0,setTimeout((()=>e.remove()),500)}),3e3)}else messageDisplay.textContent="Incorrecto, intenta de nuevo.",sounds.incorrect.play()}catch(e){messageDisplay.textContent="Expresión inválida."}})),resetBtn.addEventListener("click",(()=>{estadoInicial(),window.innerWidth<900&&(hiddenCardsContainer.style.display="inherit"),clearInterval(interval),timer=60,timerDisplay.textContent=`Tiempo: ${timer}`,updateTimerStyle(),cardResponsiveRow1.style.display="none !important;";const e=document.querySelectorAll(".card, .disabled");Array.prototype.forEach.call(e,(function(e){e.classList.remove("disabled"),e.classList.add("visible")})),messageDisplay.textContent="",targetDisplay.textContent="",selectedHidden=[],targetNumber=null,usedNumbers.clear(),document.querySelectorAll(".operator").forEach((e=>e.classList.remove("disabled"))),createHiddenCards()})),expressionInput.addEventListener("input",(()=>{const e=expressionInput.value;usedNumbers.clear(),document.querySelectorAll("#visible-cards .card").forEach((e=>{e.classList.remove("disabled")})),document.querySelectorAll(".operator").forEach((e=>{e.classList.remove("disabled")}));for(let t=1;t<=9;t++)if(e.includes(t.toString())){usedNumbers.add(t);const e=document.querySelector(`#visible-cards .card[data-value="${t}"]`);e?.classList.add("disabled")}["x","+","-"].forEach((t=>{if(e.includes(t)){const e=document.querySelector(`.operator[data-op="${t}"]`);e?.classList.add("disabled")}}))})),createHiddenCards(),estadoInicial();
+let tiempoRestante = 60;
+let temporizadorID;
+let provincias = [
+  "Buenos Aires", "Catamarca", "Chaco", "Chubut", "Córdoba", "Corrientes", "Entre Ríos",
+  "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza", "Misiones", "Neuquén",
+  "Río Negro", "Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe",
+  "Santiago del Estero", "Tierra del Fuego", "Tucumán"
+];
+
+let provinciaFaltante = "";
+
+function startGame() {
+ 
+  const index = Math.floor(Math.random() * provincias.length);
+  provinciaFaltante = provincias[index];
+  console.log("🔍 Provincia seleccionada:", provinciaFaltante);
+
+  clearInterval(temporizadorID); // detener si estaba corriendo
+  tiempoRestante = 60;
+  document.getElementById("timer").innerText = `⏱ Tiempo restante: ${tiempoRestante}s`;
+
+  temporizadorID = setInterval(() => {
+    tiempoRestante--;
+    document.getElementById("timer").innerText = `⏱ Tiempo restante: ${tiempoRestante}s`;
+
+    if (tiempoRestante <= 0) {
+      clearInterval(temporizadorID);
+      document.getElementById("result").innerText = `⏳ Tiempo agotado. Era: ${provinciaFaltante}`;
+      document.getElementById("result").style.color = "orange";
+    }
+  }, 1000);
+
+  fetch("mapa-argentina-nivel1.svg")
+    .then(response => response.text())
+    .then(svgText => {
+      document.getElementById("map-container").innerHTML = svgText;
+
+      setTimeout(() => {
+        const svg = document.querySelector("#map-container svg");
+
+        // Mostrar nombres sobre cada provincia (menos la que falta)
+        provincias.forEach(nombre => {
+          const grupo = document.getElementById(nombre);
+          if (!grupo) {
+            console.warn("❌ No se encontró la provincia:", nombre);
+            return;
+          }
+
+          // Obtener el centro de la provincia (aproximado con su bounding box)
+          const bbox = grupo.getBBox();
+          const texto = document.createElementNS("http://www.w3.org/2000/svg", "text");
+          texto.textContent = nombre;
+          texto.setAttribute("x", bbox.x + bbox.width / 2);
+          texto.setAttribute("y", bbox.y + bbox.height / 2);
+          texto.setAttribute("text-anchor", "middle");
+          texto.setAttribute("alignment-baseline", "middle");
+          texto.setAttribute("font-size", "12");
+          texto.setAttribute("fill", "#000");
+          texto.setAttribute("class", "nombre-provincia");
+          texto.setAttribute("data-provincia", nombre);
+          texto.setAttribute("pointer-events", "none");
+
+          svg.appendChild(texto);
+        });
+
+        // Ocultar provincia y su nombre
+        const grupoFaltante = document.getElementById(provinciaFaltante);
+        if (grupoFaltante) {
+          console.log("✅ Ocultando provincia:", provinciaFaltante);
+
+          // Ocultar visualmente la provincia (relleno y borde)
+          grupoFaltante.querySelectorAll("path, rect, polygon, circle").forEach(el => {
+            el.setAttribute("fill", "#f0f0f0");
+            el.setAttribute("stroke", "#f0f0f0");
+          });
+          grupoFaltante.setAttribute("style", "display: none !important;");
+
+          // Ocultar su nombre (text añadido dinámicamente)
+          const textos = svg.querySelectorAll(`text[data-provincia='${provinciaFaltante}']`);
+          textos.forEach(t => t.remove());
+        } else {
+          console.warn("⚠️ No se encontró el ID de la provincia faltante:", provinciaFaltante);
+        }
+
+      }, 0);
+    })
+    .catch(err => console.error("❌ Error al cargar el mapa:", err));
+}
+
+function checkGuess() {
+  const input = document.getElementById("user-guess").value.trim();
+  const resultado = document.getElementById("result");
+
+  if (input.toLowerCase() === provinciaFaltante.toLowerCase()) {
+    resultado.innerText = "✅ ¡Correcto!";
+    resultado.style.color = "green";
+  } else {
+    resultado.innerText = "❌ Incorrecto. Intenta nuevamente.";
+    resultado.style.color = "red";
+  }
+}
+
+window.onload = startGame;

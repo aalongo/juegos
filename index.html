@@ -1,1 +1,48 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Juego de Cálculo</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="timer.css"><script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><h1>Juego de Cálculo</h1><div id="instructions" class="instructions-box"><p style="position:relative"><strong>¿Cómo jugar?</strong></p><ul><li>Haz clic en dos cartas rosas para revelar un número objetivo de dos dígitos.</li><li>Usa los números rojos visibles (1 al 9) para construir una operación.</li><li id="usar-los-tres-operadores">Debes usar los tres operadores <strong>en orden</strong>: multiplicación (*), suma (+), y resta (-).</li><li id="multiplicar-por-1"><strong>No está permitido multiplicar por 1.</strong></li><li>Puedes reiniciar el juego cuando quieras.</li><li>Presiona "Comprobar" antes de que se acabe el tiempo.</li></ul></div><div id="hidden-cards" class="card-container"><div id="cardResponsiveRow1"></div><div id="cardResponsiveRow2"></div></div><h2 id="target-number" style="color:orange"></h2><div id="visible-cards" class="card-container"><div><div class="card visible" data-value="1" onclick="pushNumber(this)">1</div><div class="card visible" data-value="2" onclick="pushNumber(this)">2</div><div class="card visible" data-value="3" onclick="pushNumber(this)">3</div><div class="card visible" data-value="4" onclick="pushNumber(this)">4</div></div><div><div class="card visible" data-value="5" onclick="pushNumber(this)">5</div><div class="card visible" data-value="6" onclick="pushNumber(this)">6</div><div class="card visible" data-value="7" onclick="pushNumber(this)">7</div><div class="card visible" data-value="8" onclick="pushNumber(this)">8</div><div class="card visible" data-value="9" onclick="pushNumber(this)">9</div></div></div><div id="operators" class="card-container"><button class="operator" data-op="*">×</button> <button class="operator" data-op="+">+</button> <button class="operator" data-op="-">−</button></div><input type="text" id="expression" class="expression-box" placeholder="Ejemplo: 25 x 4 + 6 - 9 = 97"><div><b hidden id="buzzer">&#128264;</b> <b id="timer" class="timer-box">Tiempo: 60</b></div><div><button id="check" class="action-btn check-btn">Comprobar</button> <button id="reset" class="action-btn reset-btn">Reiniciar Juego</button></div><p id="message" class="message-box"></p><script src="script.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Juego de Memoria - Provincias Argentinas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div id="game-container">
+
+    <div id="fuentes">
+      Fuente de la Imagen
+      <a href="http://modalidadespecial.educ.ar/">modalidadespecial.educ.ar</a>
+      <br>
+      <br>
+      <div>
+        <p>El autor de este juego</p>
+        <p>considera a las Islas Malvinas</p>
+        <p>parte del territorio Nacional Argentino</p>
+      </div>
+      <div>
+        <p>La falta de conseguir un SVG</p>
+        <p>que las incluya </p>
+        <p>hizo que no puedan ser agregadas</p>
+      </div>
+    </div>
+
+    <!-- Mapa se carga aquí dinámicamente -->
+    <div id="map-container">
+      <!-- SVG se inserta por JavaScript -->
+    </div>
+
+    <!-- Panel de adivinanza -->
+    <div id="guess-section">
+      <input type="text" id="user-guess" placeholder="Escribe la provincia que falta">
+      <div id="timer">⏱ Tiempo restante: 60s</div>
+      <button onclick="checkGuess()">Comprobar</button>
+      <div id="result"></div>
+      <button onclick="startGame()">🔄 Reiniciar</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
