@@ -1,0 +1,137 @@
+/* Normalizar estilos */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url("fondo.svg");
+  background-size: 100%;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  color: #333;
+}
+
+span {
+  visibility: hidden;
+}
+
+/* Cuadro de la expresión */
+.expression-box {
+  display: block;
+  margin: 20px auto;
+  padding: 15px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background-color: #f0f4f8;
+  color: #333;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.expression-box:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  filter: grayscale(100%);
+}
+
+.action-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.check-btn {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.check-btn:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+.reset-btn {
+  background-color: #2196F3;
+  color: white;
+}
+
+.reset-btn:hover {
+  background-color: #1e88e5;
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.expression-box {
+  display: block;
+  margin: 20px auto;
+  padding: 15px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background-color: #f0f4f8;
+  color: #333;
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.expression-box:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  background-color: #45a049;
+}
